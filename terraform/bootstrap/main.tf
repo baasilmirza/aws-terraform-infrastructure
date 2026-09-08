@@ -30,11 +30,6 @@ resource "aws_s3_bucket_public_access_block" "state" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_acl" "state" {
-  bucket = aws_s3_bucket.state.id
-  acl    = "private"
-}
-
 resource "aws_s3_bucket_lifecycle_configuration" "state" {
   bucket = aws_s3_bucket.state.id
 
@@ -43,8 +38,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "state" {
     status = "Enabled"
 
     noncurrent_version_expiration {
-      newer_versions = 3
-      days           = 30
+      noncurrent_days = 30
     }
 
     abort_incomplete_multipart_upload {
