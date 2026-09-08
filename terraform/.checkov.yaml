@@ -1,0 +1,10 @@
+# Checkov suppressions with reasons.
+# Run: python -m checkov.main -d terraform (from repo root) or -d .
+skip-check:
+  - CKV_AWS_18    # Terraform state bucket: access logging needs a 2nd bucket; versioning + PITR already give recovery
+  - CKV_AWS_144   # State bucket single-region by design; state locking prevents concurrent writers
+  - CKV2_AWS_62   # S3 event notifications have no use for a state store
+  - CKV_AWS_119   # DynamoDB lock table uses AWS-owned key; CMK adds $1/mo for no gain on lock metadata
+  - CKV_AWS_158   # CloudWatch log group uses AWS-managed KMS key; CMK adds $1/mo
+  - CKV_AWS_338   # 7-day log retention is intentional flow-log cost control, not a compliance requirement
+  - CKV_AWS_355   # ssm:DescribeInstanceInformation / GetConnectionStatus are non-resource actions; "*" is the only valid resource
