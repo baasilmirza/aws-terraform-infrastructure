@@ -20,6 +20,7 @@ __pycache__/
 # Personal planning docs (kept local only)
 SPEC.md
 INSTRUCTIONS.md
+docs/*blog*.md
 
 tfplan
 *.plan
